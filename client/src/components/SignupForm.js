@@ -1,19 +1,20 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { LOGIN } from "../utils/queries";
+import { SIGNUP } from "../utils/queries";
 
 
-function LoginForm()  {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login] = useMutation(LOGIN, {
+function SignupForm()  {
+  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
+  const [signup] = useMutation(SIGNUP, {
     variables: {
+      username: formState.username,
       email: formState.email,
       password: formState.password
     },
     onCompleted: ({ userLogin }) => {
-      localStorage.setItem('auth_token', userLogin.token);
-      window.location.reload(true)
-    }
+        localStorage.setItem('auth_token', userLogin.token);
+        window.location.reload(true)
+      }
   });
 
   const handleChange = (e) => {
@@ -27,12 +28,18 @@ function LoginForm()  {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    login()
+
+    console.log('formState', formState)
+    signup()
   }
   return (
     <form onSubmit= {submitHandler}>
       <div className="form-inner">
-        <h2>Login</h2>
+        <h2>Sign up</h2>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input type="text" name="username" id="username" onChange={handleChange} />
+        </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input type="email" name="email" id="email" onChange={handleChange} />
@@ -47,4 +54,4 @@ function LoginForm()  {
   );
 }
 
-export default LoginForm;
+export default SignupForm;

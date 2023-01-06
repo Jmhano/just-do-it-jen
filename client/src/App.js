@@ -1,53 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
+
+import Logout from "./components/Logout";
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
+
 
 function App() {
-  const adminUser = {
-    email: "admin@admin.com",
-    password: "admin123",
-  };
 
-  const [user, setUser] = useState({ name: "", email: "" });
-  const [error, setError] = useState("");
-
-  const Login = (details) => {
-    console.log(details);
-
-    if (details.email == adminUser.email && details.password == adminUser.password)
-    console.log("Logged In");
-    setUser({
-      name: details.name, 
-      email: details.email
-    });
-
-  }
-  /*else*/
-
-   {
-    console.log("Details do not match!");
-  }
-  
-
-  const Logout = () => {
-    setUser({
-      name:"" , 
-      email: ""
-    });
-
-  }
   return (
-    <div className="App">
-      {user.email != "" ? (
+    <ApolloProvider client={client}>
+      <div className="App">
+      {localStorage.auth_token && localStorage.auth_token !== null ? (
         <div className="welcome">
-          <h2>
-            Welcome, <span>{user.name}</span>
-          </h2>
+          <h2>Welcome to our trainer app!</h2>
           <button onClick={Logout}>Logout</button>
         </div>
       ) : (
-        <LoginForm Login={Login} error={error}/>
+        <><LoginForm Login={LoginForm} />
+       
+        
+        <SignupForm Signup={SignupForm} />
+        </>
+
       )}
-    </div>
+      
+
+      </div>
+    </ApolloProvider>
   );
 }
 
