@@ -18,3 +18,21 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const QUERY_WORKOUT = gql`
+  query workout($username: String) {
+    workout(username: $username) {
+      _id
+      createdAt
+      workoutName
+      username
+      workoutType
+      calsBurned
+      time
+      notes
+
+
+    }
+  }
+`;
+

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const TrainerList = ({ trainerCount, username, trainers }) => {
   if (!trainers || !trainers.length) {
-    return <p className="bg-dark text-light p-3">{username}, add some trainers!</p>;
+    return <p className="form-group">{username}, add some trainers!</p>;
   }
 
   return (
@@ -12,7 +12,7 @@ const TrainerList = ({ trainerCount, username, trainers }) => {
         {username}'s {trainerCount} {trainerCount === 1 ? 'trainer' : 'trainers'}
       </h5>
       {trainers.map(trainer => (
-        <button className="btn w-100 display-block mb-2" key={trainer._id}>
+        <button className="submit" key={trainer._id}>
           <Link to={`/profile/${trainer.username}`}>{trainer.username}</Link>
         </button>
       ))}
