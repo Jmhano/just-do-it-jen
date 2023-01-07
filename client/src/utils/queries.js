@@ -18,3 +18,17 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const WORKOUT = gql`
+  mutation AddWorkout($workoutName: String!, $workoutType: String!, $calsBurned: String, $time: String, $notes: String) {
+    addWorkout(workoutName: $workoutName, workoutType: $workoutType, calsBurned: $calsBurned, time: $time, notes: $notes) {
+      username
+      workoutName
+      workoutType
+      calsBurned
+      time
+      createdAt
+      notes
+    }
+  }
+`;

@@ -1,45 +1,59 @@
 const {gql} = require('apollo-server-express');
 
 const typeDefs = gql`
-type Trainer{
-  _id: ID
-  username: String
-  email: String
-  firstName: String
-  lastName: String
-  yearsExp: Int
-  trainees: [User]
-}
-
-type User{
+type User {
   _id: ID
   username: String
   email: String
   firstName: String
   lastName: String
   age: Int
-  trainer: [Trainer]
+  status: String
+  expLevel: String
+  workouts: [Workout]
+  gym: String
 }
-
+type Workout {
+  _id: ID
+  createdAt: String
+  workoutName: String
+  username: String
+  workoutType: String
+  calsBurned: String
+  time: String
+  notes: String
+  gymLocation: String
+  reactions:[Reaction]
+  reactionCount: Int
+}
+type Gym {
+  _id: ID
+  burrough: String
+}
+type Reaction {
+  _id: ID
+  comment: String
+  reactionType: String
+  username: String
+}
 type Query {
   helloWorld: String
+  me: User
   getUsers: [User]
-  getTrainers: [Trainer]
+  getWorkouts(username:String): [Workout]
+  getWorkoutsByType(workoutType: String!): [Workout]
+  getTrainers(status: String!): [User]
 }
-
 type Mutation {
-  addUser(username: String!, email: String!, password: String!): Auth
-  addTrainer(username: String!, email: String!, password: String!): Auth
-  userLogin(email: String!, password: String!):Auth
-  trainerLogin(email: String!,password: String!):Auth
+  addWorkout(workoutName: String!, workoutType: String!,calsBurned: String, time: String, notes: String, gymLocation: String): Workout
+  addUser(username: String!, email: String!, password: String!,firstName: String!, lastName: String!,age: Int!, status: String!, expLevel: String!, gym: String!): Auth
+  userLogin(email: String!, password: String!): Auth
+  reactTo(workoutId: ID!,reactionType: String, comment: String): Workout
 }
-
-type Auth{
+type Auth {
   token: ID!
-  user:User
-  trainer:Trainer
+  user: User
 }
 `;
 
 module.exports = typeDefs;
-

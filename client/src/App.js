@@ -9,6 +9,8 @@ import {
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
+import Footer from "./components/Footer";
+import WorkoutForm from "./components/WorkoutForm";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -26,8 +28,10 @@ function App() {
       <div className="App">
       {localStorage.auth_token && localStorage.auth_token !== null ? (
         <div className="welcome">
-          <h2>Welcome to our trainer app!</h2>
+          <h2>Welcome to your trainer profile</h2>
           <button onClick={Logout}>Logout</button>
+
+          <WorkoutForm/>
         </div>
       ) : (
         <><LoginForm Login={LoginForm} />
@@ -39,6 +43,9 @@ function App() {
       )}
       
 
+      </div>
+      <div className="flex-column justify-flex-start min-100-vh">
+        <Footer />
       </div>
     </ApolloProvider>
   );
