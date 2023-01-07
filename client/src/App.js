@@ -1,6 +1,7 @@
 import React from "react";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
+// import TabPanel from "./components/TabPanel";
 
 import Logout from "./components/Logout";
 import {
@@ -28,6 +29,9 @@ function App() {
       <div className="App">
       {localStorage.auth_token && localStorage.auth_token !== null ? (
         <div className="welcome">
+
+          {/* <TabPanel/> */}
+
           <h2>Welcome to your trainer profile</h2>
           <button onClick={Logout}>Logout</button>
 
