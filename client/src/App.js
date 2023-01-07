@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
-// import TabPanel from "./components/TabPanel";
+import WorkoutTab from "./components/WorkoutTab";
 
 import Logout from "./components/Logout";
 import {
@@ -11,7 +11,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import Footer from "./components/Footer";
-import WorkoutForm from "./components/WorkoutForm";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -30,12 +29,11 @@ function App() {
       {localStorage.auth_token && localStorage.auth_token !== null ? (
         <div className="welcome">
 
-          {/* <TabPanel/> */}
+          <WorkoutTab/>
 
-          <h2>Welcome to your trainer profile</h2>
+
+          {/* <WorkoutForm/> */}
           <button onClick={Logout}>Logout</button>
-
-          <WorkoutForm/>
         </div>
       ) : (
         <><LoginForm Login={LoginForm} />

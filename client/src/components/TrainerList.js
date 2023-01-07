@@ -1,23 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// import { useQuery } from "@apollo/client";
+// import { TRAINERS } from "../utils/queries";
 
-const TrainerList = ({ trainerCount, username, trainers }) => {
-  if (!trainers || !trainers.length) {
-    return <p className="form-group">{username}, add some trainers!</p>;
-  }
+function TrainerList() {
+  // Uncomment this when we support following a trainer on the backend
+  // const { data } = useQuery(TRAINERS)
+
 
   return (
-    <div>
-      <h5>
-        {username}'s {trainerCount} {trainerCount === 1 ? 'trainer' : 'trainers'}
-      </h5>
-      {trainers.map(trainer => (
-        <button className="submit" key={trainer._id}>
-          <Link to={`/profile/${trainer.username}`}>{trainer.username}</Link>
-        </button>
-      ))}
+    <div><h5>This is a list of the trainers you follow:</h5>
+
+    {/* When we can follow trainers, this needs to be uncommented out
+    {data.getTrainerFollows.map(trainer => (
+      {trainer}
+    ))} */}
+
     </div>
-  );
+  )
 };
 
 export default TrainerList;

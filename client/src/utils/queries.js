@@ -32,3 +32,15 @@ export const WORKOUT = gql`
     }
   }
 `;
+
+export const WORKOUTS = gql`
+  query GetWorkouts {
+      getWorkouts {
+        workoutName
+        workoutType
+        notes
+        calsBurned
+        time
+      }
+    }
+`;
