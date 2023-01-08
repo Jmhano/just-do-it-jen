@@ -7,13 +7,24 @@ function SignupForm() {
     username: "",
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
+    status: "",
+    expLevel: "",
+    gym: "",
   });
   const [signup] = useMutation(SIGNUP, {
     variables: {
       username: formState.username,
       email: formState.email,
       password: formState.password,
+      firstName: formState.firstName,
+      lastName: formState.lastName,
+      status: formState.status,
+      expLevel: formState.expLevel,
+      gym: formState.gym,
     },
+
     onCompleted: ({ addUser }) => {
       localStorage.setItem("auth_token", addUser.token);
       window.location.reload(true);
@@ -61,7 +72,53 @@ function SignupForm() {
             onChange={handleChange}
           />
         </div>
-        <input type="submit" value="LOGIN" />
+
+        <div className="form-group">
+          <label htmlFor="firstName">Name:</label>
+          <input
+            type="string"
+            name="firstName"
+            id="firstName"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="string"
+            name="lastName"
+            id="lastName"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="status">Are you a user or trainer:</label>
+          <input
+            type="string"
+            name="status"
+            id="status"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="expLevel">Level:</label>
+          <input
+            type="string"
+            name="expLevel"
+            id="expLevel"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="gym">Gym:</label>
+          <input type="string" name="gym" id="gym" onChange={handleChange} />
+        </div>
+
+        <input type="submit" value="SIGNUP" />
       </div>
     </form>
   );
